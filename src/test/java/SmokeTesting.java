@@ -1,6 +1,7 @@
 public class SmokeTesting {
     public static void main(String[] args) {
-        VastNatural longNum = new BytePerDigit();
+        String magnitude = "123456";
+        VastNatural longNum = new BytePerDigit(magnitude);
         System.out.println(longNum);
         System.out.println("Hello, world!");
     }
