@@ -17,4 +17,9 @@ class BytePerDigit(magnitude: String = "") : VastNatural {
                 .map { it.digitToInt().toByte() }
                 .trimTrailingZeros()
     }
+
+    override fun toString(): String {
+        if (this.digits.isEmpty()) return "0"
+        return this.digits.reversed().joinToString("")
+    }
 }

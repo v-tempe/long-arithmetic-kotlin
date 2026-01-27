@@ -1,1 +1,3 @@
-interface VastNatural
+interface VastNatural {
+    override fun toString(): String
+}
