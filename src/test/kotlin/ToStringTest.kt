@@ -10,20 +10,13 @@ private fun String.isAllZeros() = this.all { it == '0' }
 
 
 class ToStringTest {
-    private fun checkToString(input: String, expected: String): Boolean {
-        val vastNatural = BytePerDigit(input)
-        val actual = vastNatural.toString()
-
-        return expected == actual
-    }
-
     @Property(tries = 100)
     fun `return single zero on zero value`(
         @ForAll @Chars('0') @StringLength(min = 0, max = 20) string: String
     ): Boolean {
         Assume.that(string.isAllZeros())
 
-        return checkToString(string, "0")
+        return runTest(string, "0") { it.toString() }
     }
 
     @Property
@@ -32,8 +25,8 @@ class ToStringTest {
     ): Boolean {
         Assume.that(!string.isAllZeros())
 
-        return checkToString(
+        return runTest(
             string, string.trimStart('0')
-        )
+        ) { it.toString() }
     }
 }
