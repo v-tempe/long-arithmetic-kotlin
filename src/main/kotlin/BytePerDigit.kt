@@ -20,6 +20,8 @@ class BytePerDigit(magnitude: String = "") : VastNatural {
 
     override val digitCount: Int = this.digits.size
 
+    override fun iterator(): Iterator<Byte> = this.digits.reversed().iterator()
+
     override fun toString(): String {
         if (this.digits.isEmpty()) return "0"
         return this.digits.reversed().joinToString("")
