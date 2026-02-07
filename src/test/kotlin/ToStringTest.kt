@@ -6,9 +6,6 @@ import net.jqwik.api.constraints.NumericChars
 import net.jqwik.api.constraints.StringLength
 
 
-private fun String.isAllZeros() = this.all { it == '0' }
-
-
 class ToStringTest {
     @Property(tries = 100)
     fun `return single zero on zero value`(
