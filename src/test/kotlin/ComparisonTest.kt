@@ -76,4 +76,12 @@ class ComparisonTest {
         return checkRule(string, "0")
         { nonZero, zero -> nonZero > zero }
     }
+
+    @Property
+    fun `check integration with TreeSet`(
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string: String
+    ): Boolean = checkRule(string, string) { number1, number2 ->
+        assert(number1 == number2)
+        sortedSetOf(number1, number2).size == 1
+    }
 }
