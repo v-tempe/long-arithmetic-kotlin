@@ -72,7 +72,7 @@ class ComparisonTest {
     fun `ensure that any non-zero value is greater than zero`(
         @ForAll @NumericChars @StringLength(min = 1, max = 100) string: String
     ): Boolean {
-        Assume.that(!string.isAllZeros())
+        Assume.that( ! string.isAllZeros())
         return checkRule(string, "0")
         { nonZero, zero -> nonZero > zero }
     }
@@ -98,5 +98,21 @@ class ComparisonTest {
             (number1 + number3) compareTo (number2 + number3)
 
         directComparison hasSameSignTo comparisonUnderAddition
+    }
+
+    @Property
+    fun `check preservation of comparison under subtraction the same number`(
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string3: String,
+    ): Boolean = checkRule(string1, string2, string3) { numbers ->
+        val (number1, number2, number3) = numbers
+        Assume.that((number1 >= number3) && (number2 >= number3))
+
+        val directComparison = number1 compareTo number2
+        val comparisonUnderSubtraction =
+            (number1 - number3) compareTo (number2 - number3)
+
+        directComparison hasSameSignTo comparisonUnderSubtraction
     }
 }

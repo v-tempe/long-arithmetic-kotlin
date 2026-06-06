@@ -1,3 +1,4 @@
+import net.jqwik.api.Assume
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.NumericChars
@@ -27,5 +28,23 @@ class DigitCountTest {
         val firstDigitIsOne = result.toString().startsWith('1')
 
         lengthRemained || lengthIncremented && firstDigitIsOne
+    }
+
+    @Property
+    fun `check length upper bound under subtraction`(
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
+    ): Boolean = checkRule(string1, string2) { number1, number2 ->
+        Assume.that(number1 >= number2)
+        number1.digitCount >= (number1 - number2).digitCount
+    }
+
+    @Property
+    fun `check length lower bound under subtraction`(
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
+    ): Boolean = checkRule(string1, string2) { number1, number2 ->
+        Assume.that(number1 >= number2)
+        (number1 - number2).digitCount >= number1.digitCount - number2.digitCount
     }
 }

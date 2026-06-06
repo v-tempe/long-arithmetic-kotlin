@@ -18,5 +18,7 @@ interface VastNatural : Iterable<Byte>, Comparable<VastNatural> {
 
     operator fun plus(other: VastNatural): VastNatural
 
+    operator fun minus(other: VastNatural): VastNatural
+
     override fun toString(): String
 }

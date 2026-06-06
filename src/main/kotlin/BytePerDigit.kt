@@ -10,6 +10,7 @@ class BytePerDigit private constructor(magnitude: List<Byte>) : VastNatural {
 
     companion object {
         private const val MAGNITUDE_MUST_BE_DIGITS = "'magnitude' must be a string of digits"
+        private const val MINUEND_LESS_THAN_SUBTRAHEND = "minuend less than subtrahend"
 
         operator fun invoke(magnitude: String = ""): BytePerDigit {
             require(magnitude.all { it.isDigit() }) { "$MAGNITUDE_MUST_BE_DIGITS, got $magnitude" }
@@ -53,6 +54,29 @@ class BytePerDigit private constructor(magnitude: List<Byte>) : VastNatural {
 
     override operator fun plus(other: VastNatural): VastNatural {
         return this + BytePerDigit(other.joinToString(""))
+    }
+
+    operator fun minus(other: BytePerDigit): BytePerDigit {
+        val byteMinus: (Byte, Byte) -> Byte = { left, right -> (left - right).toByte() }
+
+        val maxSize = maxOf(this.digits.size, other.digits.size)
+        var borrow: Byte = 0
+        val result = (0 until maxSize).map { i ->
+            val resultSubtraction: Byte = listOf(
+                this.digits.getOrNull(i) ?: 0,
+                other.digits.getOrNull(i) ?: 0,
+                borrow
+            ).reduce(byteMinus).toByte()
+            borrow = (1 - (resultSubtraction + BASE) / BASE).toByte()
+            val nextDigit = ((resultSubtraction + BASE) % BASE).toByte()
+            nextDigit
+        }
+        require(borrow == 0.toByte()) { "$MINUEND_LESS_THAN_SUBTRAHEND, minuend: $this, subtrahend: $other" }
+        return BytePerDigit(result)
+    }
+
+    override fun minus(other: VastNatural): VastNatural {
+        return this - BytePerDigit(other.joinToString(""))
     }
 
     override fun toString(): String {
