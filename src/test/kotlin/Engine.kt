@@ -24,3 +24,9 @@ fun checkRule(
 
     return rule(number1, number2)
 }
+
+
+fun checkRule(
+    vararg inputs: String,
+    rule: (List<BytePerDigit>) -> Boolean
+): Boolean = rule(inputs.map { BytePerDigit(it) })

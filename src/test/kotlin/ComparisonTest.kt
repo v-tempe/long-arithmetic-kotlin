@@ -84,4 +84,19 @@ class ComparisonTest {
         assert(number1 == number2)
         sortedSetOf(number1, number2).size == 1
     }
+
+    @Property
+    fun `check preservation of comparison under addition the same number`(
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
+        @ForAll @NumericChars @StringLength(min = 0, max = 100) string3: String,
+    ): Boolean = checkRule(string1, string2, string3) { numbers ->
+        val (number1, number2, number3) = numbers
+
+        val directComparison = number1 compareTo number2
+        val comparisonUnderAddition =
+            (number1 + number3) compareTo (number2 + number3)
+
+        directComparison hasSameSignTo comparisonUnderAddition
+    }
 }

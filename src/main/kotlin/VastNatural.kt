@@ -16,5 +16,7 @@ interface VastNatural : Iterable<Byte>, Comparable<VastNatural> {
 
     override fun hashCode(): Int
 
+    operator fun plus(other: VastNatural): VastNatural
+
     override fun toString(): String
 }
