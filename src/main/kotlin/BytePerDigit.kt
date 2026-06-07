@@ -3,10 +3,12 @@ private fun List<Byte>.trimTrailingZeros(): List<Byte> =
 
 
 private const val BASE = 10
+private const val HASH_MULTIPLIER = 31
 
 
 class BytePerDigit private constructor(magnitude: List<Byte>) : VastNatural {
     private val digits: List<Byte> = magnitude.trimTrailingZeros()
+    private val hash = this.digits.fold(1) { acc, digit -> acc * HASH_MULTIPLIER + digit }
 
     companion object {
         private const val MAGNITUDE_MUST_BE_DIGITS = "'magnitude' must be a string of digits"
@@ -32,9 +34,7 @@ class BytePerDigit private constructor(magnitude: List<Byte>) : VastNatural {
         return this.compareTo(other) == 0
     }
 
-    override fun hashCode(): Int {
-        return this.digits.fold(1) { acc, digit -> acc * 31 + digit }
-    }
+    override fun hashCode(): Int = this.hash
 
     operator fun plus(other: BytePerDigit): BytePerDigit {
         val maxSize = maxOf(this.digits.size, other.digits.size)
