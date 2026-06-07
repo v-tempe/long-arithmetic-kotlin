@@ -1,3 +1,6 @@
+import kotlin.Throws
+
+
 interface VastNatural : Iterable<Byte>, Comparable<VastNatural> {
     val digitCount: Int
 
@@ -18,6 +21,7 @@ interface VastNatural : Iterable<Byte>, Comparable<VastNatural> {
 
     operator fun plus(other: VastNatural): VastNatural
 
+    @Throws(IllegalArgumentException::class)
     operator fun minus(other: VastNatural): VastNatural
 
     override fun toString(): String
