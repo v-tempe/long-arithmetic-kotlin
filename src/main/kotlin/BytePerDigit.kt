@@ -1,3 +1,4 @@
+
 private fun List<Byte>.trimTrailingZeros(): List<Byte> =
     this.dropLastWhile { it == 0.toByte() }
 
