@@ -9,9 +9,6 @@ import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 
-private fun String.isNumeric(): Boolean = this.all { it.isDigit() }
-
-
 class ConstructorTest {
     @Test
     fun `pass without args`(): Unit = assertDoesNotThrow {

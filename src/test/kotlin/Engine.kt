@@ -1,6 +1,9 @@
 import kotlin.math.sign
 
 
+fun String.isNumeric() = this.all { it.isDigit() }
+
+
 fun String.isAllZeros() = this.all { it == '0' }
 
 
