@@ -3,7 +3,6 @@ import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.NumericChars
 import net.jqwik.api.constraints.StringLength
-import org.junit.jupiter.api.assertDoesNotThrow
 import kotlin.test.assertFailsWith
 
 
