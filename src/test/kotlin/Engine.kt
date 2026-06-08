@@ -18,12 +18,10 @@ fun checkRule(
     input1: String,
     input2: String,
     rule: (BytePerDigit, BytePerDigit) -> Boolean
-): Boolean {
-    val number1 = BytePerDigit(input1)
-    val number2 = BytePerDigit(input2)
-
-    return rule(number1, number2)
-}
+): Boolean = rule(
+    BytePerDigit(input1),
+    BytePerDigit(input2),
+)
 
 
 fun checkRule(
