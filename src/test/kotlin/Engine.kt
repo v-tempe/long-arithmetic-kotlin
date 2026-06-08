@@ -46,3 +46,18 @@ fun checkRule(
     vararg inputs: String,
     rule: (List<BytePerDigit>) -> Boolean
 ): Boolean = rule(inputs.map { BytePerDigit(it) })
+
+
+fun checkRuleSortedDescending(
+    input1: String,
+    input2: String,
+    rule: (BytePerDigit, BytePerDigit) -> Boolean
+): Boolean {
+    val cmp = input1 compareAsNumbersWith input2
+
+    val (minInput, maxInput) =
+        if (cmp > 0) input1 to input2
+        else input2 to input1
+
+    return checkRule(minInput, maxInput, rule)
+}

@@ -45,9 +45,7 @@ class SubtractionTest {
     fun `check monotony`(
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 >= number2)
-
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
         number1 >= number1 - number2
     }
 
@@ -75,8 +73,7 @@ class SubtractionTest {
     fun `check consistency with addition through decrease`(
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 >= number2)
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
         (number1 - number2) + number2 == number1
     }
 
@@ -84,8 +81,7 @@ class SubtractionTest {
     fun `check consistency with addition through increase`(
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 >= number2)
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
         (number1 + number2) - number2 == number1
     }
 }

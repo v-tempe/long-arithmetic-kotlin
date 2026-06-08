@@ -44,8 +44,8 @@ class ToStringTest {
     fun `trim leading zeros after subtraction`(
         @ForAll @NumericChars @StringLength(min = 1, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 1, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 > number2)
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
+        Assume.that(number1 != number2)
 
         val result = number1 - number2
         val resultStartsWithZero = result.toString().startsWith('0')

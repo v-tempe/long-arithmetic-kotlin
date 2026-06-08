@@ -1,4 +1,3 @@
-import net.jqwik.api.Assume
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.NumericChars
@@ -34,8 +33,7 @@ class DigitCountTest {
     fun `check length upper bound under subtraction`(
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 >= number2)
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
         number1.digitCount >= (number1 - number2).digitCount
     }
 
@@ -43,8 +41,7 @@ class DigitCountTest {
     fun `check length lower bound under subtraction`(
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string1: String,
         @ForAll @NumericChars @StringLength(min = 0, max = 100) string2: String,
-    ): Boolean = checkRule(string1, string2) { number1, number2 ->
-        Assume.that(number1 >= number2)
+    ): Boolean = checkRuleSortedDescending(string1, string2) { number1, number2 ->
         (number1 - number2).digitCount >= number1.digitCount - number2.digitCount
     }
 }
