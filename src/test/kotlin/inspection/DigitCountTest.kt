@@ -1,7 +1,12 @@
+package inspection
+
+import checkRule
+import checkRuleSortedDescending
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.NumericChars
 import net.jqwik.api.constraints.StringLength
+import runTest
 import kotlin.math.max
 
 

@@ -1,3 +1,6 @@
+package equality
+
+import checkRule
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.NumericChars

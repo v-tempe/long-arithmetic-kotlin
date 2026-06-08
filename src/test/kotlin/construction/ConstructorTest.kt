@@ -1,3 +1,7 @@
+package construction
+
+import BytePerDigit
+import isNumeric
 import net.jqwik.api.Assume
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property

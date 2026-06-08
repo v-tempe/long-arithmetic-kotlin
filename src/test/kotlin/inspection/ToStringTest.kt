@@ -1,9 +1,15 @@
+package inspection
+
+import checkRule
+import checkRuleSortedDescending
+import isAllZeros
 import net.jqwik.api.Assume
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
 import net.jqwik.api.constraints.Chars
 import net.jqwik.api.constraints.NumericChars
 import net.jqwik.api.constraints.StringLength
+import runTest
 
 
 class ToStringTest {
@@ -33,11 +39,11 @@ class ToStringTest {
         @ForAll @NumericChars @StringLength(min = 1, max = 100) string2: String,
     ): Boolean = checkRule(string1, string2) { number1, number2 ->
         val bothZeros = string1.isAllZeros() && string2.isAllZeros()
-        Assume.that( ! bothZeros)
+        Assume.that(!bothZeros)
 
         val result = number1 + number2
         val resultStartsWithZero = result.toString().startsWith('0')
-        ! resultStartsWithZero
+        !resultStartsWithZero
     }
 
     @Property
@@ -49,6 +55,6 @@ class ToStringTest {
 
         val result = number1 - number2
         val resultStartsWithZero = result.toString().startsWith('0')
-        ! resultStartsWithZero
+        !resultStartsWithZero
     }
 }

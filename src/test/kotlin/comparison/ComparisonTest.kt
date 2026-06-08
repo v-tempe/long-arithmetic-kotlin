@@ -1,3 +1,11 @@
+package comparison
+
+import BytePerDigit
+import checkRule
+import compareAsNumbersWith
+import hasOppositeSignTo
+import hasSameSignTo
+import isAllZeros
 import net.jqwik.api.Assume
 import net.jqwik.api.ForAll
 import net.jqwik.api.Property
