@@ -2,8 +2,8 @@ plugins {
     kotlin("jvm") version "2.2.21"
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "com.github.v-tempe"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
