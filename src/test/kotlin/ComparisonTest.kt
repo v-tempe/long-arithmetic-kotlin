@@ -6,22 +6,6 @@ import net.jqwik.api.constraints.StringLength
 import kotlin.math.sign
 
 
-private infix fun String.compareAsNumbersWith(other: String): Int =
-    compareValuesBy(
-        this.trimStart('0'),
-        other.trimStart('0'),
-        { it.length }, { it }
-    )
-
-
-private infix fun Int.hasSameSignTo(other: Int): Boolean =
-    this.sign == other.sign
-
-
-private infix fun Int.hasOppositeSignTo(other: Int): Boolean =
-    this.sign * other.sign == -1
-
-
 class ComparisonTest {
     @Property
     fun `check correct work`(

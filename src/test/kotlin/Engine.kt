@@ -1,5 +1,23 @@
+import kotlin.math.sign
+
 
 fun String.isAllZeros() = this.all { it == '0' }
+
+
+infix fun String.compareAsNumbersWith(other: String): Int =
+    compareValuesBy(
+        this.trimStart('0'),
+        other.trimStart('0'),
+        { it.length }, { it }
+    )
+
+
+infix fun Int.hasSameSignTo(other: Int): Boolean =
+    this.sign == other.sign
+
+
+infix fun Int.hasOppositeSignTo(other: Int): Boolean =
+    this.sign * other.sign == -1
 
 
 fun <TypeExpected> runTest(
