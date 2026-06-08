@@ -45,7 +45,10 @@ bin/
 .DS_Store
 
 
+## Custom
+# IntelliJ IDEA
 .idea/
 
 
+# Jqwik
 .jqwik-database
